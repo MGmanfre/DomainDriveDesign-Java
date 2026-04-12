@@ -19,11 +19,15 @@ public class Veiculo {
         this.status = status;
     }
 
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
     public String getNome() {
         return nome;
     }
 
-    public double getPreco() {
+    public double getPrecoDiaria() {
         return precoDiaria;
     }
 
@@ -40,6 +44,10 @@ public class Veiculo {
     }
     public String getCategoria() {
         return categoria;
+    }
+
+    public boolean getStatus() {
+        return status;
     }
 
     public String isStatus() {
