@@ -42,16 +42,17 @@ public class Veiculo {
         return categoria;
     }
 
-    public String getTudo() {
-        return (nome + " "+ precoDiaria +" "+  cambio +" "+  placa +" "+  cor +" "+  categoria +" "+ status);
-    }
-
-    public boolean isStatus() {
+    public String isStatus() {
         if (status == true) {
-            System.out.println("carro alugado");
-        } else if (status == false) {
-            System.out.println("carro disponivel");
+            String S = "carro já esta alugado";
+            return S;
         }
-        return status;
+        else {
+            String S = "carro disponivel";
+            return S ;
+        }
+    }
+    public String getTudo() {
+        return (nome + " "+ precoDiaria +" "+  cambio +" "+  placa +" "+  cor +" "+  categoria +" "+ isStatus());
     }
 }
