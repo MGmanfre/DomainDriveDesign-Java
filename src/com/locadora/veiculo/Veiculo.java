@@ -63,4 +63,9 @@ public class Veiculo {
     public String getTudo() {
         return (nome + " "+ precoDiaria +" "+  cambio +" "+  placa +" "+  cor +" "+  categoria +" "+ isStatus());
     }
+
+    @Override
+    public String toString() {
+        return this.getTudo() + "\n";
+    }
 }
