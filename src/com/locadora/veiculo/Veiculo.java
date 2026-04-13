@@ -6,10 +6,10 @@ public class Veiculo {
     private String cambio;
     private final String placa;
     private String cor;
-    private String categoria;
+    private CategoriaVeiculo.Categorias categoria;
     private boolean status;
 
-    public Veiculo(String nome,double preco, String cambio, String placa, String cor, String categoria,boolean status) {
+    public Veiculo(String nome, double preco, String cambio, String placa, String cor, CategoriaVeiculo.Categorias categoria, boolean status) {
         this.nome = nome;
         this.precoDiaria = preco;
         this.cambio = cambio;
@@ -42,7 +42,8 @@ public class Veiculo {
     public String getCor() {
         return cor;
     }
-    public String getCategoria() {
+
+    public CategoriaVeiculo.Categorias getCategoria() {
         return categoria;
     }
 
@@ -62,5 +63,10 @@ public class Veiculo {
     }
     public String getTudo() {
         return (nome + " "+ precoDiaria +" "+  cambio +" "+  placa +" "+  cor +" "+  categoria +" "+ isStatus());
+    }
+
+    @Override
+    public String toString() {
+        return this.getTudo() + "\n";
     }
 }
