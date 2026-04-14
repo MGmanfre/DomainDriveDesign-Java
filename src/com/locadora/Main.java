@@ -24,7 +24,7 @@ public class Main {
         Veiculo carroTeste4 = new Veiculo("audi a4",330.00,"automatico","kod-4321","prata", todasCategorias[2],true);
         Veiculo carroTeste5 = new Veiculo("moto foda",330.00,"automatico","koe-4321","prata", todasCategorias[3],false);
         Veiculo carroTeste6 = new Veiculo("van preta para traficantes",330.00,"manual","kof-4321","prata", todasCategorias[4],false);
-        Locacao locacaoTeste = new Locacao(LocalDate.of(2025,3,28),LocalDate.of(2025,4,28),LocalDate.of(2025,4,28),carroTeste);
+        // Locacao locacaoTeste = new Locacao(LocalDate.of(2025,3,28),LocalDate.of(2025,4,28),LocalDate.of(2025,4,28),carroTeste);
 
         ArrayList<Veiculo> economico = new ArrayList<>();
         ArrayList<Veiculo> intermediario = new ArrayList<>();
@@ -119,8 +119,29 @@ public class Main {
                     else {
                         v.setStatus(true);
                         System.out.println("carro alugado: " + v.getNome());
-                        break;
                     }
+                    System.out.println("digite a data de retirada: dia");
+                    Scanner dr = new Scanner(System.in);
+                    int diaRetirada = dr.nextInt();
+                    System.out.println("digite a data de retirada: mes");
+                    Scanner mr = new Scanner(System.in);
+                    int mesRetirada = mr.nextInt();
+                    System.out.println("digite a data de retirada: ano");
+                    Scanner ar = new Scanner(System.in);
+                    int anoRetirada = ar.nextInt();
+
+                    System.out.println("digite a data de entrega: dia");
+                    Scanner de = new Scanner(System.in);
+                    int diaEntrega = de.nextInt();
+                    System.out.println("digite a data de entrega: mes");
+                    Scanner me = new Scanner(System.in);
+                    int mesEntrega = me.nextInt();
+                    System.out.println("digite a data de entrega: ano");
+                    Scanner ae = new Scanner(System.in);
+                    int anoEntrega = ae.nextInt();
+
+                    Locacao datasCarro = new Locacao(LocalDate.of(anoRetirada,mesRetirada,diaRetirada),LocalDate.of(anoEntrega,mesEntrega,diaEntrega),LocalDate.of(anoEntrega,mesEntrega,diaEntrega),v);
+                    System.out.println(datasCarro);
                 }
             }
             System.out.println("de uma olhada no nosso catalogo!");

@@ -23,7 +23,7 @@ public class Locacao {
     }
 
     public double calcularPrecoAluguel() {
-        if (veiculo.getStatus() == false){
+        if (veiculo.getStatus()){
             double precoDeAluguel = getQuantidadeDias() * veiculo.getPrecoDiaria();
             return precoDeAluguel;
         }
@@ -47,6 +47,11 @@ public class Locacao {
         return multa() + calcularPrecoAluguel();
     }
 
+
+    @Override
+    public String toString() {
+        return this.getQuantidadeDias() + "\n" + this.total_a_pagar();
+    }
 
 
 }
