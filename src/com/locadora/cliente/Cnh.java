@@ -29,4 +29,13 @@ public class Cnh {
 	public boolean estaValida() {
 		return !dataVencimento.isBefore(LocalDate.now());
 	}
+
+	public String getTudo() {
+		return "numero da Cnh: " + this.getNumero() + "\nvalidade: " + this.getDataVencimento() ;
+	}
+
+	@Override
+	public String toString() {
+		return getTudo();
+	}
 }

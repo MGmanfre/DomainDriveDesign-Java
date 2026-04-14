@@ -42,4 +42,13 @@ public class Endereco {
 
 		return valor;
 	}
+
+	public String getTudo() {
+		return "rua: " + this.getRua() + " " + this.getNumero() + "\nbairro: " + this.getBairro() + "\ncidade: " + this.getCidade() + "\ncep: " + this.getCep() ;
+	}
+
+	@Override
+	public String toString() {
+		return getTudo();
+	}
 }

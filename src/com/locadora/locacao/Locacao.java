@@ -50,7 +50,7 @@ public class Locacao {
 
     @Override
     public String toString() {
-        return this.getQuantidadeDias() + "\n" + this.total_a_pagar();
+        return "quantidade de dias alugados: " + this.getQuantidadeDias() + "\n" + "total a ser pago: " + this.total_a_pagar();
     }
 
 

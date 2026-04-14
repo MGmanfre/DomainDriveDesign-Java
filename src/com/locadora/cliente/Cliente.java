@@ -41,23 +41,12 @@ public class Cliente {
         return cnh;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+   public String getTudo() {
+        return "nome: " + this.getNome() + "\ncpf: " + this.getCpf() + "\ntelefone: " + this.getTelefone() + "\nemail: " + this.getEmail() + "\nendereço: " + this.getEndereco() + "\ncnh: " + this.getCnh() ;
+   }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
-    public void setCnh(Cnh cnh) {
-        this.cnh = cnh;
+    @Override
+    public String toString() {
+        return getTudo();
     }
 }
