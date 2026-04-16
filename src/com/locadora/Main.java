@@ -3,6 +3,7 @@ package com.locadora;
 import com.locadora.cliente.Cliente;
 import com.locadora.cliente.Cnh;
 import com.locadora.cliente.Endereco;
+import com.locadora.locacao.Alugueis_antigos;
 import com.locadora.locacao.Locacao;
 import com.locadora.veiculo.CategoriaVeiculo;
 import com.locadora.veiculo.Veiculo;
@@ -14,23 +15,24 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static Veiculo setCarro(String nome, double preco, String cambio, String placa, String cor, CategoriaVeiculo.Categorias setCategoria, boolean status) {
-        Veiculo novoAluguel = new Veiculo(nome,preco,cambio,placa,cor,setCategoria, status);
+    public static Alugueis_antigos setCarro(String nome, double preco, String cambio, String placa, String cor, CategoriaVeiculo.Categorias setCategoria, boolean status, String cpf) {
+        Veiculo veiculo = new Veiculo(nome,preco,cambio,placa,cor,setCategoria, status);
+        Alugueis_antigos novoAluguel = new Alugueis_antigos(veiculo,cpf);
+
         return novoAluguel;
     }
 
     public static void main(String[] args) {
         CategoriaVeiculo.Categorias[] todasCategorias = CategoriaVeiculo.Categorias.values();
-        Veiculo carroTeste = new Veiculo("equinox",230.00,"automatico","koa-4321","prata", todasCategorias[2],false);
-        Veiculo carroTeste2 = new Veiculo("fiat argo",130.00,"automatico","kob-4321","prata", todasCategorias[1],false);
-        Veiculo carroTeste3 = new Veiculo("fiesta",330.00,"automatico","koc-4321","prata", todasCategorias[0],false);
-        Veiculo carroTeste4 = new Veiculo("audi a4",330.00,"automatico","kod-4321","prata", todasCategorias[2],true);
-        Veiculo carroTeste5 = new Veiculo("moto foda",330.00,"automatico","koe-4321","prata", todasCategorias[3],false);
-        Veiculo carroTeste6 = new Veiculo("van preta ",330.00,"manual","kof-4321","prata", todasCategorias[4],false);
+        Veiculo carroTeste = new Veiculo("equinox",200.00,"automatico","koa-4321","prata", todasCategorias[2],false);
+        Veiculo carroTeste2 = new Veiculo("fiat argo",120.00,"automatico","kob-4321","prata", todasCategorias[1],false);
+        Veiculo carroTeste3 = new Veiculo("fiesta",80.00,"automatico","koc-4321","prata", todasCategorias[0],false);
+        Veiculo carroTeste4 = new Veiculo("audi a4",200.00,"automatico","kod-4321","prata", todasCategorias[2],true);
+        Veiculo carroTeste5 = new Veiculo("moto foda",50.00,"automatico","koe-4321","prata", todasCategorias[3],false);
+        Veiculo carroTeste6 = new Veiculo("van preta ",180.00,"manual","kof-4321","prata", todasCategorias[4],false);
         Endereco enderecoClienteTeste1 = new Endereco("rua vivo fibras cardosos","4123","santo antonio do pinhal"," paraisopolis","451191345");
         Cnh cnhClienteTeste1 = new Cnh("59346135086",LocalDate.of(2028,12,14));
         Cliente clienteTeste1 = new Cliente("vitor","11122233344","11999999999","vitorpallis@gmail.com",enderecoClienteTeste1,cnhClienteTeste1);
-        // Locacao locacaoTeste = new Locacao(LocalDate.of(2025,3,28),LocalDate.of(2025,4,28),LocalDate.of(2025,4,28),carroTeste);
 
         ArrayList<Veiculo> economico = new ArrayList<>();
         ArrayList<Veiculo> intermediario = new ArrayList<>();
@@ -43,6 +45,8 @@ public class Main {
 
         ArrayList<Veiculo> todos = new ArrayList<>();
         ArrayList<ArrayList<Veiculo>> todosOsveiculos = new ArrayList<>();
+
+        ArrayList<Veiculo> carrosAlugados= new ArrayList<>();
 
         todos.add(carroTeste);
         todos.add(carroTeste2);
@@ -138,6 +142,7 @@ public class Main {
                     Cliente novoCliente = new Cliente(setNome,setCpf,setTelefone,setEmail,novoEndereco,novaCnh);
                     System.out.println(novoCliente);
 
+                    login = setCpf;
                 }
             }
 
@@ -181,7 +186,7 @@ public class Main {
                 break;
             }
             for (Veiculo v : todosOsveiculos.get(categoriaAluguel - 1)) {
-                if (v.getNome().equals(nomeAluguel)) {
+                if (v.getNome().trim().equals(nomeAluguel)) {
                     if(v.getStatus()) {
                         System.out.println("infelizmente esse carro ja esta alugado! ate a proxima!");
                         break;
@@ -203,7 +208,8 @@ public class Main {
 
                     System.out.println("carro alugado: " + v.getNome() + "\nplaca do carro: " + v.getPlaca());
 
-                    System.out.println(setCarro(v.getNome(),datasCarro.total_a_pagar(), v.getCambio(), v.getPlaca(),v.getCor(),v.getCategoria(),v.getStatus()));
+                    setCarro(v.getNome(),datasCarro.total_a_pagar(), v.getCambio(), v.getPlaca(),v.getCor(),v.getCategoria(),v.getStatus(),login);
+                    System.out.println(setCarro(v.getNome(),datasCarro.total_a_pagar(), v.getCambio(), v.getPlaca(),v.getCor(),v.getCategoria(),v.getStatus(),login));
                     break;
                 }
                 else {
