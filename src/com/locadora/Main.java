@@ -81,6 +81,66 @@ public class Main {
         while (true){
             System.out.println("bem vindo a locadora do seu carlos!");
 
+            System.out.println("digte seu cpf: ");
+            Scanner cpfverificacao = new Scanner(System.in);
+            String login = cpfverificacao.nextLine();
+            for (Cliente c : clientesDB) {
+                if(c.getCpf().equals(login)) {
+                    if (clientesDB.contains(c)) {
+                        continue;
+                    }
+                }
+                else{
+                    System.out.println("não achamos registros seus, teremos que fazer um login.");
+
+                    System.out.println("digte a rua da sua casa: ");
+                    Scanner novaRua = new Scanner(System.in);
+                    String setRua = novaRua.nextLine();
+                    System.out.println("digte o numero da sua casa: ");
+                    Scanner novoNumero = new Scanner(System.in);
+                    String setNumero = novoNumero.nextLine();
+                    System.out.println("digte o bairro onde mora: ");
+                    Scanner novoBairro = new Scanner(System.in);
+                    String setBairro = novoBairro.nextLine();
+                    System.out.println("digte a cidade onde mora: ");
+                    Scanner novaCidade = new Scanner(System.in);
+                    String setCidade = novaCidade.nextLine();
+                    System.out.println("digte seu cep: ");
+                    Scanner novoCep = new Scanner(System.in);
+                    String setCep = novoCep.nextLine();
+                    Endereco novoEndereco = new Endereco(setRua,setNumero,setBairro,setCidade,setCep);
+
+                    System.out.println("digte seu numero da cnh: ");
+                    Scanner novoNumeroCnh = new Scanner(System.in);
+                    String setcnh = novoNumeroCnh.nextLine();
+                    System.out.println("digte a validade da sua cnh(AAAA-MM-DD): ");
+                    Scanner novaValidade = new Scanner(System.in);
+                    String setValidade = novaValidade.nextLine();
+                    if (LocalDate.parse(setValidade).isBefore(LocalDate.now())) {
+                        System.out.println("a sua CNH esta vencida tente novamente mais tarde!");
+                        break;
+                    }
+                    Cnh novaCnh = new Cnh(setcnh,LocalDate.parse(setValidade));
+
+
+                    System.out.println("digte seu nome: ");
+                    Scanner novoNome = new Scanner(System.in);
+                    String setNome = novoNome.nextLine();
+                    System.out.println("digte seu cpf: ");
+                    Scanner novoCpf = new Scanner(System.in);
+                    String setCpf = novoCpf.nextLine();
+                    System.out.println("digte seu telefone: ");
+                    Scanner novoTelefone = new Scanner(System.in);
+                    String setTelefone = novoTelefone.nextLine();
+                    System.out.println("digte seu email: ");
+                    Scanner novoEmail = new Scanner(System.in);
+                    String setEmail = novoEmail.nextLine();
+                    Cliente novoCliente = new Cliente(setNome,setCpf,setTelefone,setEmail,novoEndereco,novaCnh);
+                    System.out.println(novoCliente);
+
+                }
+            }
+
             System.out.println("categorias: ");
             for(int i = 0; i < todasCategorias.length; i++) {
                 if (i >= 3 ) {
@@ -130,27 +190,15 @@ public class Main {
                         v.setStatus(true);
                         System.out.println("carro alugado!");
                     }
-                    System.out.println("digite a data de retirada: dia");
-                    Scanner dr = new Scanner(System.in);
-                    int diaRetirada = dr.nextInt();
-                    System.out.println("digite a data de retirada: mes");
-                    Scanner mr = new Scanner(System.in);
-                    int mesRetirada = mr.nextInt();
-                    System.out.println("digite a data de retirada: ano");
-                    Scanner ar = new Scanner(System.in);
-                    int anoRetirada = ar.nextInt();
+                    System.out.println("digite a data de retirada(AAAA-MM-DD): ");
+                    Scanner dataRetirada = new Scanner(System.in);
+                    String retirada = dataRetirada.nextLine();
 
-                    System.out.println("digite a data de entrega: dia");
-                    Scanner de = new Scanner(System.in);
-                    int diaEntrega = de.nextInt();
-                    System.out.println("digite a data de entrega: mes");
-                    Scanner me = new Scanner(System.in);
-                    int mesEntrega = me.nextInt();
-                    System.out.println("digite a data de entrega: ano");
-                    Scanner ae = new Scanner(System.in);
-                    int anoEntrega = ae.nextInt();
+                    System.out.println("digite a data de entrega(AAAA-MM-DD): ");
+                    Scanner dataentrega = new Scanner(System.in);
+                    String entrega = dataentrega.nextLine();
 
-                    Locacao datasCarro = new Locacao(LocalDate.of(anoRetirada,mesRetirada,diaRetirada),LocalDate.of(anoEntrega,mesEntrega,diaEntrega),LocalDate.of(anoEntrega,mesEntrega,diaEntrega),v);
+                    Locacao datasCarro = new Locacao(LocalDate.parse(retirada),LocalDate.parse(entrega),LocalDate.parse(entrega),v);
                     System.out.println(datasCarro);
 
                     System.out.println("carro alugado: " + v.getNome() + "\nplaca do carro: " + v.getPlaca());
