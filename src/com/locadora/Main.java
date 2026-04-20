@@ -200,43 +200,57 @@ public class Main {
                 break;
             }
             // esse for define as datas e verifica se o carro esta apto para aluguel
+            boolean encontrado = false;
+
             for (Veiculo v : todosOsveiculos.get(categoriaAluguel - 1)) {
-                if (v.getNome().trim().equals(nomeAluguel)) {
-                    if(v.getStatus()) {
-                        // se jã estiver alugado ele não efetua a compra
+
+                if (v.getNome().trim().equalsIgnoreCase(nomeAluguel.trim())) {
+
+                    encontrado = true;
+
+                    if (v.getStatus()) {
                         System.out.println("infelizmente esse carro ja esta alugado! ate a proxima!");
-                        break;
-                    }
-                    else {
-                        // se o carro não estiver alugado ele efetua o aluguel
+                    } else {
                         v.setStatus(true);
                         System.out.println("carro alugado!");
+
+                        System.out.println("digite a data de retirada(AAAA-MM-DD): ");
+                        Scanner dataRetirada = new Scanner(System.in);
+                        String retirada = dataRetirada.nextLine();
+
+                        System.out.println("digite a data de entrega(AAAA-MM-DD): ");
+                        Scanner dataEntrega = new Scanner(System.in);
+                        String entrega = dataEntrega.nextLine();
+
+                        Locacao datasCarro = new Locacao(
+                                LocalDate.parse(retirada),
+                                LocalDate.parse(entrega),
+                                LocalDate.parse(entrega),
+                                v
+                        );
+
+                        System.out.println(datasCarro);
+
+                        System.out.println("carro alugado: " + v.getNome() +
+                                "\nplaca do carro: " + v.getPlaca());
+
+                        System.out.println(setCarro(
+                                v.getNome(),
+                                datasCarro.total_a_pagar(),
+                                v.getCambio(),
+                                v.getPlaca(),
+                                v.getCor(),
+                                v.getCategoria(),
+                                v.getStatus(),
+                                login
+                        ));
                     }
-                    // defini a data de entrega e a data de devolução do carro
-                    System.out.println("digite a data de retirada(AAAA-MM-DD): ");
-                    Scanner dataRetirada = new Scanner(System.in);
-                    String retirada = dataRetirada.nextLine();
 
-                    System.out.println("digite a data de entrega(AAAA-MM-DD): ");
-                    Scanner dataentrega = new Scanner(System.in);
-                    String entrega = dataentrega.nextLine();
-
-                    // calcula o preço de acordo com a data
-                    Locacao datasCarro = new Locacao(LocalDate.parse(retirada),LocalDate.parse(entrega),LocalDate.parse(entrega),v);
-                    System.out.println(datasCarro);
-
-                    System.out.println("carro alugado: " + v.getNome() + "\nplaca do carro: " + v.getPlaca());
-
-                    // defini qual carro foi alugado e imprime na tela
-                    setCarro(v.getNome(),datasCarro.total_a_pagar(), v.getCambio(), v.getPlaca(),v.getCor(),v.getCategoria(),v.getStatus(),login);
-                    System.out.println(setCarro(v.getNome(),datasCarro.total_a_pagar(), v.getCambio(), v.getPlaca(),v.getCor(),v.getCategoria(),v.getStatus(),login));
                     break;
                 }
-                else {
-                    // essa mensagem aparece se o cliente digitar algum carro que não tenhamos no catalogo
-                    System.out.println("não encontramos o carro que vc gostaria de alugar, tente escrever o nome parecido com o do catalogo.");
-                }
-
+            }
+            if (!encontrado) {
+                System.out.println("não encontramos o carro que vc gostaria de alugar, tente escrever o nome parecido com o do catalogo.");
             }
 
             // mostra o catalogo
